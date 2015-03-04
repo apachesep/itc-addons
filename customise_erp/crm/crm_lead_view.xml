@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+		
+		<record id="crm_case_form_view_leads_extended" model="ir.ui.view">
+			<field name="name">crm.case.form.view.leads.extended</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//form[@string='Leads Form']/header" position="replace">
+					<header>
+						<button name="%(crm.action_crm_lead2opportunity_partner)d"
+							string="Convert to Opportunity" type="action" help="Convert to Opportunity"
+							class="oe_highlight" attrs="{'invisible':[('state','!=','approver2')]}" />
+						<field name="stage_id" widget="statusbar" clickable="True"
+							domain="['&amp;', '|', ('case_default', '=', True), ('section_ids', '=', section_id), '|', ('type', '=', type), ('type', '=', 'both')]"
+							options="{'fold_field': 'fold'}" on_change="onchange_stage_id(stage_id)"  attrs="{'invisible':[('state','!=','approver2')]}"/>
+					
+						<button name="product_review1" string="Reviewer 1" type="object" states="draft" class="oe_highlight" />
+						<button name="product_reviewer2" string="Reviewer 2" type="object" states="review1" class="oe_highlight" />
+						<button name="product_approver1" string="Approver 1" type="object" states="reviewer2" class="oe_highlight" />
+						<button name="product_approver2" string="Approver 2" type="object" states="approver1" class="oe_highlight" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,review1,reviewer2,approver1,approver2" attrs="{'invisible':[('state','==','approver2')]}"/>
+					</header>
+				</xpath>
+
+				<xpath expr="//div[@class='address_format']" position="after">
+					<field name="po_box" placeholder="PO Box..." />
+				</xpath>
+
+				<xpath expr="//field[@name='email_from']" position="after">
+					<field name="website" />
+					<field name="lead_source_id"/>
+					<field name="status"/>
+					<field name="rating"/>
+					<field name="company_fax" />
+				</xpath>
+
+				<xpath expr="//page[@string='Internal Notes']" position="after">
+					<page string="Customer information">
+						<group string="Customer Information" col="4" colspan="12">
+							<field name="ext" />
+							<field name="gender" />
+							<field name="language" />
+							<field name="mobile2" />
+							<field name="com_phone" />
+							<field name="comp_other_phone" />
+<field name="comp_email"/>
+<field name="generat_by"/>
+
+							<field name="district" />
+							<field name="gov_entity_type" />
+							<field name="subsidiary" />
+							<field name="vendor_registration" />
+							<field name="birth_date" />
+							<field name="federal_gov" />
+							<field name="holding_company" />
+							<field name="business_tower" />
+							<field name="Reg" />
+							<field name="market_partner" />
+						</group>
+						
+						<group string="More Information" col="4" colspan="12">
+							<field name="industry" />
+							<field name="annual_revenue" />
+							<field name="no_of_employeee" />
+							<field name="yahoo" />
+						</group>
+					</page>
+				</xpath>
+
+
+
+			</field>
+		</record>
+
+		<!-- Opportunity -->
+
+		<record id="opportunity_form_view_leads_extended" model="ir.ui.view">
+			<field name="name">opportunity.form.view.leads.extended</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="replace">
+				<field name="potential_name" />
+				<field name="related_to1" />
+				</xpath>
+				
+				<xpath expr="//page[@string='Fund Raising']" position="after">
+					<page string="Tendering">
+						<group col="4" colspan="12">
+							<field name="tender" />
+							<field name="ten_subject" />
+							<field name="ten_ref" />
+							<field name="realese_date" />
+							<field name="tender_close_date" />
+							<field name="proposal_date" />
+							<field name="contac" />
+							<field name="person" />
+							<field name="summary" />
+						</group>
+					</page>
+				</xpath>
+				<xpath expr="//page[@string='Tendering']" position="after">
+					<page string="Other">
+						<group col="4" colspan="12">
+							<field name="typee" />
+							<field name="next" />
+							<field name="lead" />
+							<field name="sales_stage" />
+							<field name="assign" />
+							<field name="probability" />
+							<field name="campain" />
+							<field name="product_service" />
+							<field name="entity" />
+							
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+	<data>
+		<record id="crm_case_kanban_view_leads_extended" model="ir.ui.view">
+			<field name="name">crm.case.kanban.view.leads.extended</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="replace">
+						<field name="related_to1" />
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

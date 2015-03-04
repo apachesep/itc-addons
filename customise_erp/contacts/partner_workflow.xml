@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="wkf_partner" model="workflow">
+			<field name="name">partner.workflow</field>
+			<field name="osv">res.partner</field>
+			<field name="on_create">True</field>
+		</record>
+
+
+		<!-- Activity -->
+
+		<record id="partner_act_draft" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_partner" />
+			<field name="flow_start">True</field>
+			<field name="name">draft</field>
+		</record>
+
+		<record id="partner_act_review1" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_partner" />
+			<field name="name">review1</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'review1'})</field>
+		</record>
+
+		<record id="partner_act_reviewer2" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_partner" />
+			<field name="name">reviewer2</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'reviewer2'})</field>
+		</record>
+
+		<record id="partner_act_approver1" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_partner" />
+			<field name="name">approver1</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'approver1'})</field>
+		</record>
+
+		<record id="partner_act_approver2" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_partner" />
+			<field name="name">approver2</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'approver2'})</field>
+		</record>
+
+		<!-- transition -->
+		
+		<record id="partner_trans_review1" model="workflow.transition">
+			<field name="act_from" ref="partner_act_draft" />
+			<field name="act_to" ref="partner_act_review1" />
+			<field name="signal">partner_review1</field>
+		</record>
+
+		<record id="partner_trans_reviewer2" model="workflow.transition">
+			<field name="act_from" ref="partner_act_review1" />
+			<field name="act_to" ref="partner_act_reviewer2" />
+			<field name="signal">partner_reviewer2</field>
+		</record>
+
+		<record id="partner_trans_approver1" model="workflow.transition">
+			<field name="act_from" ref="partner_act_reviewer2" />
+			<field name="act_to" ref="partner_act_approver1" />
+			<field name="signal">partner_approver1</field>
+		</record>
+
+		<record id="partner_trans_approver2" model="workflow.transition">
+			<field name="act_from" ref="partner_act_approver1" />
+			<field name="act_to" ref="partner_act_approver2" />
+			<field name="signal">partner_approver2</field>
+		</record>
+
+		
+	</data>
+</openerp>

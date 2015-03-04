@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+		<record id="purchase_form_view_extended" model="ir.ui.view">
+			<field name="name">purchase.form.view.extended</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='picking_type_id']" position="after">
+						<field name="subject" />
+				</xpath>
+				<xpath expr="//page[@string='Deliveries &amp; Invoices']" position="after">
+					<page string="Other">
+						<group col="4" colspan="12">
+							<field name="requisition" />
+							<field name="tracking" />
+							<field name="carrier" />
+							<field name="salescomm" />
+							<field name="excise" />
+							<field name="assign_to" />
+							<field name="paid" />
+							<field name="team" />
+							<field name="so"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

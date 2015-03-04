@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+<record id="hr_employee_extended_sec_view" model="ir.ui.view">
+			<field name="name">hr.employee.sec.extended.view</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='bank_account_id']" position="replace">
+					<field name="bank_account_num"/>
+				</xpath>
+
+			</field>
+		</record>
+
+		<record id="hr_employee_extended_view" model="ir.ui.view">
+			<field name="name">hr.employee.extended.view</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				
+				<xpath expr="//sheet" position="before">
+					<header>
+						<button name="product_review1" string="Reviewer 1" type="object" states="draft" class="oe_highlight" />
+						<button name="product_reviewer2" string="Reviewer 2" type="object" states="review1" class="oe_highlight" />
+						<button name="product_approver1" string="Approver 1" type="object" states="reviewer2" class="oe_highlight" />
+						<button name="product_approver2" string="Approver 2" type="object" states="approver1" class="oe_highlight" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,review1,reviewer2,approver1,approver2" />
+					</header>
+				</xpath>
+				
+				<xpath expr="//page[@string='Personal Information']//field[@name='marital']" position="after">
+						<field name="spouce" />
+				</xpath>
+				<xpath expr="//field[@name='work_phone']" position="after">
+						<label for="title_labour"/>
+                        <field name="title_labour"/>
+				</xpath>
+				<xpath expr="//page[@string='Personal Information']//field[@name='birthday']" position="after">
+						<field name="join_date" />
+				</xpath>
+				<xpath expr="//page[@string='Personal Information']//field[@name='passport_id']" position="replace">
+				</xpath>
+				<xpath expr="//page[@string='Personal Information']//field[@name='country_id']" position="replace">
+				</xpath>
+				
+				<xpath expr="//page[@string='Personal Information']//group[@string='Contact Information']" position="after">
+					<group col="4" colspan="12" string="Passport Information">
+						<field name="name_passport" />
+						<field name="country_id" />
+						<field name="passport_id" />
+						<field name="place_issued" />
+						<field name="date_issue" />
+						<field name="current_visa" />
+						<field name="date_expiry" />
+						<field name="validity" />
+					</group>
+				</xpath>
+				<xpath expr="//field[@name='department_id']" position="after">
+						<field name="id_type" />
+				</xpath>
+				<xpath expr="//page[@string='HR Settings']" position="after">
+					<page string="Emergency Contacts">
+					<table>
+						<tr>
+							<td>
+								<group>
+									<field name="name_eme" />
+									<field name="relationship"/>
+									<field name="address"/>
+									<field name="city"/>
+									<field name="home_phone"/>
+									<field name="mobile"/>
+								</group>
+							</td>
+							<td><span style="color:white;">.......</span></td>
+							<td><span style="color:white;">.......</span></td>
+							<td><span style="color:white;">.......</span></td>
+							<td><span style="color:white;">.......</span></td>
+							<td>
+								<group>
+									<field name="name_eme1" />
+									<field name="relationship1"/>
+									<field name="address1"/>
+									<field name="city1"/>
+									<field name="home_phone1"/>
+									<field name="mobile1"/>
+								</group>
+							</td>
+						</tr>
+					</table>
+					</page>
+				</xpath>
+
+				<xpath expr="//page[@string='Emergency Contacts']" position="inside">
+					<sheet>
+						<separator colspan="4" string="Remarks:"/>
+						<span>Please indicate in this section any special conditions you may have that should be made known to an ambulance driver or an attending Physician who does not know your medical history: i.e. Allergies, etc. Also mention your BLOOD GROUP:</span>
+								<field name="remark"/>
+						<span>This sheet will be placed in your personal folder for use if the occasion should occur that we would need this information to help you.<b> This information will remain confidential. EMPLOYEE SHOULD UPDATE THIS INFORMATION REGULARLY IN CASE THERE ARE ANY CHANGES.</b></span>
+						</sheet>
+				</xpath>
+				<xpath expr="//page[@string='Emergency Contacts']//field[@name='mobile']" position="after">
+					<separator colspan="4" string="Physician Details:"/>
+							<field name="name_phy" />
+							<field name="address_phy"/>
+							<field name="city_phy"/>
+							<field name="home_phone_phy"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

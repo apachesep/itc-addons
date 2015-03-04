@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="wkf_product" model="workflow">
+			<field name="name">product.workflow</field>
+			<field name="osv">product.template</field>
+			<field name="on_create">True</field>
+		</record>
+
+
+		<!-- Activity -->
+
+		<record id="product_act_draft" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_product" />
+			<field name="flow_start">True</field>
+			<field name="name">draft</field>
+		</record>
+
+		<record id="product_act_reviewer2" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_product" />
+			<field name="name">reviewer2</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'reviewer2'})</field>
+		</record>
+
+		<record id="product_act_approver1" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_product" />
+			<field name="name">approver1</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'approver1'})</field>
+		</record>
+
+		<record id="product_act_approver2" model="workflow.activity">
+			<field name="wkf_id" ref="wkf_product" />
+			<field name="name">approver2</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'approver2'})</field>
+		</record>
+
+		<!-- transition -->
+
+		<record id="product_trans_reviewer2" model="workflow.transition">
+			<field name="act_from" ref="product_act_draft" />
+			<field name="act_to" ref="product_act_reviewer2" />
+			<field name="signal">product_reviewer2</field>
+		</record>
+
+		<record id="product_trans_approver1" model="workflow.transition">
+			<field name="act_from" ref="product_act_reviewer2" />
+			<field name="act_to" ref="product_act_approver1" />
+			<field name="signal">product_approver1</field>
+		</record>
+
+		<record id="product_trans_approver2" model="workflow.transition">
+			<field name="act_from" ref="product_act_approver1" />
+			<field name="act_to" ref="product_act_approver2" />
+			<field name="signal">product_approver2</field>
+		</record>
+
+		
+	</data>
+</openerp>

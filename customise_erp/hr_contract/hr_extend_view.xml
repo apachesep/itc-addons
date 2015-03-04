@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+		<record id="hr_contract_form_view_leads_extended" model="ir.ui.view">
+			<field name="name">hr.contract.form.view.leads.extended</field>
+			<field name="model">hr.contract</field>
+			<field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+			<field name="arch" type="xml">
+				
+				<xpath expr="//sheet" position="before">
+					<header>
+						<button name="review1" string="Reviewer 1" states="draft" class="oe_highlight" />
+						<button name="reviewer2" string="Reviewer 2" states="review1" class="oe_highlight" />
+						<button name="approver1" string="Approver 1" states="reviewer2" class="oe_highlight" />
+						<button name="approver2" string="Approver 2" states="approver1" class="oe_highlight" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,review1,reviewer2,approver1,approver2" />
+					</header>
+				</xpath>
+				
+				<xpath expr="//page[@string='Work Permit']" position="after">
+					<page string="Service Contract Information">
+						<group col="4" colspan="12">
+							<field name="lpo" />
+							<field name="con_offi" />
+							<field name="subject" />
+							<field name="type" />
+							<field name="track_unit" />
+							<field name="user_id" />
+							<field name="total_unit" />
+							<field name="section_id" />
+							<field name="use_unit" />
+							<field name="priority" />
+							<field name="renewal_notice" />
+							<field name="terminate" />
+						</group>
+					</page>
+				</xpath>
+
+				<xpath expr="//page[@string='Service Contract Information']" position="after">
+					<page string="Technical">
+						<group col="4" colspan="12">
+							<field name="scope" />
+							<field name="engineer" />
+							<field name="sla" />
+							<field name="detail_scope" />
+						</group>
+					</page>
+				</xpath>
+				<xpath expr="//page[@string='Technical']" position="after">
+					<page string="Commercial">
+						<group col="4" colspan="12">
+							<field name="performance"/>
+							<field name="cont_value"/>
+							<field name="pb_value"/>
+							<field name="payment_sche"/>
+							<field name="pb_issue"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>

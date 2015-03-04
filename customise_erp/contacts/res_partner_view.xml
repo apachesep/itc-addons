@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+		<record id="view_partner_form_extended" model="ir.ui.view">
+			<field name="name">view.partner.form.extended</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//sheet" position="before">
+					<header>
+						<button name="partner_review1" string="Reviewer 1" states="draft" class="oe_highlight" />
+						<button name="partner_reviewer2" string="Reviewer 2" states="review1" class="oe_highlight" />
+						<button name="partner_approver1" string="Approver 1" states="reviewer2" class="oe_highlight" />
+						<button name="partner_approver2" string="Approver 2" states="approver1" class="oe_highlight" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,review1,reviewer2,approver1,approver2" />
+					</header>
+				</xpath>
+
+
+				<xpath expr="//div[@class='address_format']" position="after">
+					<field name="po_box" placeholder="PO Box..." />
+				</xpath>
+
+				<xpath expr="//field[@name='mobile']" position="after">
+					<field name="mobile2" />
+				</xpath>
+				<xpath expr="//field[@name='title']" position="after">
+					<field name="decision_maker" />
+					<field name="ext" />
+					<field name="ticker_symbol" attrs="{'invisible':[('customer','==',False)]}" />
+				</xpath>
+				<xpath expr="//field[@name='website']" position="after">
+					<field name="birth_date" />
+					<field name="gender" />
+					<field name="lead_source" />
+				</xpath>
+				<xpath expr="//field[@name='name']" position="before">
+					<field name="salutation" placeholder="salutation..." />
+				</xpath>
+				
+				<xpath expr="//field[@name='property_account_position']" position="before">
+					<field name="member_of" />
+					<field name="account_name"/>
+				</xpath>
+
+				<xpath expr="//page[@string='Sales &amp; Purchases']"
+					position="after">
+					<page string="Custom Information">
+						<group col="4" colspan="12"
+							attrs="{'invisible':[('customer','==',False)]}">
+							<field name="districts_id" />
+							<field name="generated_by" />
+							<field name="business_tower" />
+							<field name="approved_finance" />
+							<field name="federal_gov" />
+							<field name="major_account" />
+							<field name="holding_company" />
+							<field name="key_account" />
+							<field name="subsidiary" />
+							<field name="gov_entity_type_id" />
+							<field name="market_parer" />
+							<field name="vendor_registration" />
+							<field name="reg" />
+						</group>
+
+						<group col="4" colspan="12"
+							attrs="{'invisible':[('supplier','==',False)]}">
+							<field name="gl_account" />
+							<field name="hq" />
+							<field name="partner_agreement" />
+							<field name="partner_footprint" />
+							<field name="marketing_authorization" />
+							<field name="partnering" />
+						</group>
+					</page>
+					<page string="Other Address">
+						<group col="4" colspan="12">
+
+							<field name="other_street" />
+							<field name="other_po_box" />
+							<field name="other_city" />
+							<field name="other_state_id" />
+							<field name="other_postal_code" />
+<field name="comp_email"/>
+							<field name="other_country_id" />
+						</group>
+					</page>
+					<page string="More Information">
+						<separator string="Contact Information" />
+						<group col="4" colspan="12">
+							<field name="home_phone" />
+							<field name="other_phone" />
+							<field name="department" />
+							<field name="birth_date" />
+							<field name="report_to" />
+							<field name="assistant" />
+							<field name="yahoo_id" />
+							<field name="assistant_phone" />
+							<field name="do_not_call" />
+							<field name="email_opt_out" />
+							<field name="reference" />
+							<field name="notify_owner" />
+							<field name="other_email" />
+							<field name="employees" />
+							<field name="ownership" />
+							<field name="rating" />
+							<field name="industry" />
+							<field name="sic_code" />
+							<field name="type1" />
+							<field name="annual_revenue" />
+						</group>
+
+						<separator string="Customer Portal Information" />
+						<group col="4" colspan="12">
+							<field name="protal_user" />
+							<field name="support_start_date" />
+							<field name="support_end_date" />
+						</group>
+
+						<separator string="Contact Image Information" />
+						<group col="4" colspan="12">
+							<field name="contact_image" />
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>
